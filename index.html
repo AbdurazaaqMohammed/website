@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abdurazaaq Mohammed - Portfolio</title>
+    <style>
+				@font-face {
+						font-family: 'MyCustomFont';
+						src: url('https://files.catbox.moe/ap02k1.ttf') format('truetype');
+				}
+        body {
+            font-family: 'MyCustomFont', 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        header {
+            background-color: #00aaff;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #009933;
+						color: #ff0000;
+        }
+        nav ul li {
+            padding: 15px 0;
+        }
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+            animation: slideIn 2s ease;
+        }
+        section {
+            margin-bottom: 20px;
+            background-color: #87CEEB;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        section h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        section p {
+            color: #0000000;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Abdurazaaq Mohammed - Portfolio</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#abt">About Me</a></li>
+            <li><a href="#qual">My Qualifications</a></li>
+            <li><a href="#acc">My Accomplishments</a></li>
+        </ul>
+    </nav>
+    <main>
+				<section id="abt">
+            <h2>About Me</h2>
+            <p>Muslim · Second Year Computing Student at SBCS · Aspiring Android Developer and Modder · YouTuber</p>
+        </section>
+        <section id="qual">
+            <h2>My Qualifications</h2>
+            <ul>
+              <a href="https://drive.google.com/file/d/1Pu17qnicswwT0__X7767j3Ci520wbnwq/view?usp=sharing"><li>Grade One with all As in CSEC Information Technology</li></a>
+              <li>Completed SBCS Diploma in Computing</li>
+            </ul>
+        </section>
+      
+        <section id="acc">
+            <h2>My Accomplishments</h2>            
+            <ul>
+              <li>Major Android Releaser <a href="https://forum.mobilism.org/memberlist.php?mode=viewprofile&u=1786547">on Mobilism</a></li>
+              <li><a href="https://www.youtube.com/@iLoveMyReligion">YouTube channel with over 6000 subscribers</a></li>
+            </ul>
+        </section>
+    </main>
