@@ -66,6 +66,13 @@
             padding: 20px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
         }
+				footer {
+            margin-bottom: 20px;
+            background-color: #004ba9;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
         section h2 {
             margin-top: 0;
             color: #333;
@@ -81,6 +88,36 @@
             }
         }
     </style>
+    <script>
+          fetch('https://api.github.com/repos/fxolan/website/contents/blogposts')
+            .then(response => response.json())
+            .then(data => {
+              console.log(data);
+        
+              if (!Array.isArray(data)) {
+                throw new Error('Invalid response from GitHub API');
+              }
+        
+              data.sort((a, b) => {
+                const dateA = new Date(a?.commit?.author?.date);
+                const dateB = new Date(b?.commit?.author?.date);
+                return dateA.toLocaleString().localeCompare(dateB.toLocaleString());
+              });
+        
+              const promises = data.map(file => {
+                return fetch(file.download_url)
+                  .then(response => response.text())
+                  .then(content => {
+                    const title = content.split('\n')[0];
+                    return {
+                      title: title,
+                      content: content,
+                      isOpen: false
+                    };
+                  });
+              });
+            });
+    </script>
 </head>
 <body>
     <header>
@@ -95,10 +132,10 @@
     </nav>
     <main>
         <section id="latest">
-            <h2>Fixing a common crash after removing a package from an APK</h2>
-            <p>28th November 2023</p>
-            <p>Being able to read crash logs is a must for effectively removing any package, as it is likely to break something and crash. At least this is one thing MIUI is good for. Anyway, one of the common problems causing a crash is involved with the use of Contexts as method parameters. These cannot be removed by regex easily. If we replaced all registers relating to what we removed with 0x0, the method will be trying to use Context that is 0x0. In most cases, the method can simply be cleared, which can be done quickly with MT Manager. If clearing the method causes a further related crash (Note: Apps will likely have multiple unrelated methods containing Context that will crash), it likely means that the app has an actual dependence on the deleted files.</p>
+							
         </section>
     </main>
+		<footer id="fileName">
+		</footer>
 </body>
 </html>
