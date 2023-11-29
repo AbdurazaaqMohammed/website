@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blog Post - Abdurazaaq Mohammed</title>
+    <style>
+        @font-face {
+            font-family: 'MyCustomFont';
+            src: url('https://files.catbox.moe/ap02k1.ttf') format('truetype');
+        }
+        body {
+            font-family: 'MyCustomFont', 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #d8d4ce;
+        }
+        #table-of-contents a:link {
+            color: green;
+        }
+        #table-of-contents a:visited {
+            color: green;
+        }
+        header {
+            background-color: #3391ff;
+            color: #d8d4ce;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            background-color: #009933;
+            color: #ff0000;
+        }
+        nav ul li {
+            padding: 15px 0;
+        }
+        nav ul li a {
+            color: #e8e6e3;
+            text-decoration: none;
+            position: relative;
+        }
+        nav ul li a:hover {
+            transition: 0.3s;
+        }
+        nav ul li a:hover::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background-color: #e8e6e3;
+        }
+        main {
+            padding: 20px;
+            animation: slideIn 2s ease;
+        }
+        section {
+            margin-bottom: 20px;
+            background-color: #004ba9;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        }
+        section h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Abdurazaaq Mohammed - Blog</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/website">About Me</a></li>
+            <li><a href="/website/apk-modification">APK Modification</a></li>
+            <li><a href="/website/blog/main">Blog</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="latest">
+            <h2>Fixing a common crash after removing a package from an APK</h2>
+            <p>28th November 2023</p>
+            <p>Being able to read crash logs is a must for effectively removing any package, as it is likely to break something and crash. At least this is one thing MIUI is good for. Anyway, one of the common problems causing a crash is involved with the use of Contexts as method parameters. These cannot be removed by regex easily. If we replaced all registers relating to what we removed with 0x0, the method will be trying to use Context that is 0x0. In most cases, the method can simply be cleared, which can be done quickly with MT Manager. If clearing the method causes a further related crash (Note: Apps will likely have multiple unrelated methods containing Context that will crash), it likely means that the app has an actual dependence on the deleted files.</p>
+        </section>
+    </main>
+</body>
+</html>
