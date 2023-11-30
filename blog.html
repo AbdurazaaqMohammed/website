@@ -88,36 +88,53 @@
             }
         }
     </style>
-    <script>
-          fetch('https://api.github.com/repos/fxolan/website/contents/blogposts')
-            .then(response => response.json())
-            .then(data => {
-              console.log(data);
-        
-              if (!Array.isArray(data)) {
+		<script>
+    fetch('https://api.github.com/repos/fxolan/website/contents/blogposts')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            if (!Array.isArray(data)) {
                 throw new Error('Invalid response from GitHub API');
-              }
-        
-              data.sort((a, b) => {
+            }
+
+            data.sort((a, b) => {
                 const dateA = new Date(a?.commit?.author?.date);
                 const dateB = new Date(b?.commit?.author?.date);
                 return dateA.toLocaleString().localeCompare(dateB.toLocaleString());
-              });
-        
-              const promises = data.map(file => {
-                return fetch(file.download_url)
-                  .then(response => response.text())
-                  .then(content => {
-                    const title = content.split('\n')[0];
-                    return {
-                      title: title,
-                      content: content,
-                      isOpen: false
-                    };
-                  });
-              });
             });
-    </script>
+
+            const promises = data.map(file => {
+                return fetch(file.download_url)
+                    .then(response => response.text())
+                    .then(content => {
+                        const title = content.split('\n')[0];
+                        const fileName = file.name.replace(".txt", "");
+                        return {
+                            title: title,
+                            content: content,
+                            isOpen: false,
+                            fileName: fileName
+                        };
+                    });
+            });
+
+            return Promise.all(promises);
+        })
+        .then(posts => {
+            const latestSection = document.querySelector('#latest');
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.innerHTML = `<h2>${post.title}</h2>`;
+                postElement.addEventListener('click', () => {
+                    post.isOpen = !post.isOpen;
+                    postElement.innerHTML = post.isOpen ? `${post.content}<p>${post.fileName}</p>` : `<h2>${post.title}</h2>`;
+                });
+                latestSection.appendChild(postElement);
+            });
+        })
+        .catch(error => console.error(error));
+	</script>
 </head>
 <body>
     <header>
