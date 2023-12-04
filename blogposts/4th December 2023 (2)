@@ -40,11 +40,11 @@ Replace
 <code><pre>#</pre></code></li>
 
   <li>
-    a) Decompile with Apktool M or just open AndroidManifest.xml in MT VIP or APK Editor
-\n
-    b) In AndroidManifest.xml delete everything with the name of what you just deleted from dex (eg. if you deleted applovin just search applovin and delete all methods with it\n
-    Note: You must delete the entire method. For example:
-    <code><pre>&lt;receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsReceiver"/&gt;</pre></code>\n
-    You have to delete the entire method wherever you see it. Delete everything between &lt;whatever and /&gt;</li>
+    <p>a) Decompile with Apktool M or just open AndroidManifest.xml in MT VIP or APK Editor</p>
+    <p>b) In AndroidManifest.xml delete everything with the name of what you just deleted from dex (eg. if you deleted applovin just search applovin and delete all methods with it</p>
+    <p>Note: You must delete the entire method. For example:
+    <code><pre>&lt;receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsReceiver"/&gt;</pre></code></p>
+
+    <p>You have to delete the entire method wherever you see it. Delete everything between &lt;whatever and /&gt;</li></p>
     
     <p>Note: There's still a high chance that the app will crash. Check the crash log and try to fix the problem. I have documented some of the problems in the blog posts above. Another simple one is a view from a removed package being present in an XML file but not available in the DEX files. Hopefully, there will only be 1-2 problems, but if the app has a deep implementation of he package or actually relies on something from a deleted package, it will keep crashing</p>
