@@ -150,7 +150,7 @@
 				postElement.appendChild(contentElement);
 				expandButton.addEventListener('click', () => {
 					post.isOpen = !post.isOpen;
-										expandButton.classList.toggle('flipped', post.isOpen);
+					expandButton.classList.toggle('flipped', post.isOpen);
 					contentElement.style.display = post.isOpen ? 'block' : 'none';
 				});
 				main.appendChild(postElement);
