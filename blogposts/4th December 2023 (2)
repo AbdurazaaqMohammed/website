@@ -1,0 +1,51 @@
+<h2>Fully removing a package from an APK, including analytics and trackers such as Google Measurement, Firebase Analytics & Crashlytics, etc.</h2>
+<ol>
+  <li>In MT Manager, view the APK, open all dex files in DEX Editor Plus. Delete the main folders of whatever package you want to remove. </li>
+  <li>Search the names of whatever packages you removed. If you removed multiple packages, search with regex on like this:
+  <code><pre>(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk)</pre></code>
+  Include the brackets if you are searching for multiple packages. You can add or remove anything you want from the regex. To edit all below at once, copy this message, create a text file in MT Manager, click Search then Replace in the text file with whatever you want.</li>
+  
+  <p>Apply the following by "Replace in current results" WITH REGEX. You must do it in the provided order or the app may crash or fail to compile.</p>
+
+  <li>Search
+<code><pre>invoke.*\{.*\},\s.*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk).*\n\s*move-result.*([pv]\d+)</pre></code>
+Replace
+<code><pre>const $2, 0x0#</pre></code></li>
+
+  <li>Search
+<code><pre>(i|s)get-object ([pv]\d+), .*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk)</pre></code>
+Replace
+<code><pre>const $2, 0x0#</pre></code></li>
+
+  <li>Search
+<code><pre>invoke.*\{.*\},\s.*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk)</pre></code>
+Replace
+<code><pre>#</pre></code></li>
+  <li>Search
+<code><pre>(\.method.*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk))([\s\S]*?)\.end method</pre></code>
+Replace
+<code><pre>#</pre></code></li>
+
+  <li>Search
+<code><pre>(\.annotation.*\n.*\n.*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk))([\s\S]*?)\.end annotation</pre></code>
+Replace
+<code><pre>#</pre></code></li>
+  <li>Search
+<code><pre>super .*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk).*</pre></code>
+Replace it with any class from the application just copy a class name that is not final and put it</li>
+
+  <li>Search
+<code><pre>.*(gms/ads|Google/ads|internal/ads|gms/measurement|internal/measurement|firebase/analytics|firebase/crashlytics|Bytedance|applovin|ironsrc|ironsource|mmadbridge|mbridge/sdk|openvk)</pre></code>
+Replace
+<code><pre>#</pre></code></li>
+
+  <li>
+    a) Decompile with Apktool M or just open AndroidManifest.xml in MT VIP or APK Editor
+    b) In AndroidManifest.xml delete everything with the name of what you just deleted from dex (eg. if you deleted applovin just search applovin and delete all methods with it
+    Note: You must delete the entire method for example
+    <code><pre>&lt;receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsReceiver"/&gt;</pre></code>
+    You have to delete the entire thing wherever you see it delete everything between <whatever and /&gt;
+    c) If you deleted google ads open /res folder search in files for adview and delete the google adview method from main xml, this might not be necessary
+    If you dont understand compile the app and check crash log</li>
+    
+    <p>Note there is still a high chance to crash check the crash log and try to fix the problem, hopefully there will only be 1-2 problems but if the app has a deep implementation of ads or actually relies on something what you deleted it will keep crashing</p>
