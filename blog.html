@@ -65,11 +65,30 @@
             border-radius: 5px;
             padding: 20px;
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+						position: relative;
         }
         section h2 {
             margin-top: 0;
             color: #8E7DBE;
         }
+				.expand-button {
+						position: absolute; /* Addthis line */
+						top: 10px; /* Adjust the top position as needed */
+						right: 10px; /* Adjust the right position as needed */
+						width: 50px; /* Set the width to 30% */
+						height: 50px; /* Make the height adjust automatically */
+						float: right;
+						background-image: url(https://raw.githubusercontent.com/fxolan/website/main/arrow-204-512.png);
+						background-size: 100%;
+						background-color: transparent;
+						background-repeat: no-repeat;
+				}
+				.expanded-content {
+            display: none;
+        }
+				.expand-button.flipped {
+						transform: rotate(180deg);
+				}
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -80,7 +99,7 @@
                 transform: translateY(0);
             }
         }
-    </style>
+				</style>
     <script>
     fetch('https://api.github.com/repos/fxolan/website/contents/blogposts')
         .then(response => response.json())
@@ -105,7 +124,7 @@
                         const fileName = file.name.replace(".txt", "");
                         return {
                             title: title,
-                            content: content,
+                            content: content.split(title)[1],
                             isOpen: false,
                             fileName: fileName
                         };
@@ -118,9 +137,17 @@
             posts.forEach(post => {
                 const postElement = document.createElement('section');
                 postElement.innerHTML = `<h2>${post.title}</h2>`;
-                postElement.addEventListener('click', () => {
+                const expandButton = document.createElement('button');
+                expandButton.classList.add('expand-button');
+                const contentElement = document.createElement('div');
+                contentElement.classList.add('expanded-content');
+                contentElement.innerHTML = `${post.content}<p>${post.fileName}</p>`;
+                postElement.appendChild(expandButton);
+                postElement.appendChild(contentElement);
+                expandButton.addEventListener('click', () => {
                     post.isOpen = !post.isOpen;
-                    postElement.innerHTML = post.isOpen ? `${post.content}<p>${post.fileName}</p>` : `<h2>${post.title}</h2>`;
+										expandButton.classList.toggle('flipped', post.isOpen);
+                    contentElement.style.display = post.isOpen ? 'block' : 'none';
                 });
                 main.appendChild(postElement);
             });
