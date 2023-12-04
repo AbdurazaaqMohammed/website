@@ -41,11 +41,10 @@ Replace
 
   <li>
     a) Decompile with Apktool M or just open AndroidManifest.xml in MT VIP or APK Editor
+
     b) In AndroidManifest.xml delete everything with the name of what you just deleted from dex (eg. if you deleted applovin just search applovin and delete all methods with it
-    Note: You must delete the entire method for example
+    Note: You must delete the entire method. For example:
     <code><pre>&lt;receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.analytics.AnalyticsReceiver"/&gt;</pre></code>
-    You have to delete the entire thing wherever you see it delete everything between <whatever and /&gt;
-    c) If you deleted google ads open /res folder search in files for adview and delete the google adview method from main xml, this might not be necessary
-    If you dont understand compile the app and check crash log</li>
+    You have to delete the entire method wherever you see it. Delete everything between &lt;whatever and /&gt;</li>
     
-    <p>Note there is still a high chance to crash check the crash log and try to fix the problem, hopefully there will only be 1-2 problems but if the app has a deep implementation of ads or actually relies on something what you deleted it will keep crashing</p>
+    <p>Note: There's still a high chance that the app will crash. Check the crash log and try to fix the problem. I have documented some of the problems in the blog posts above. Another simple one is a view from a removed package being present in an XML file but not available in the DEX files. Hopefully, there will only be 1-2 problems, but if the app has a deep implementation of he package or actually relies on something from a deleted package, it will keep crashing</p>
