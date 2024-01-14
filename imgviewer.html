@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Image Viewer</title>
+</head>
+<body>
+
+<input type="text" id="urlInput" placeholder="Enter image URL here">
+<button id="displayButton" onclick="displayImage()">Display Image</button>
+
+<script>
+function displayImage() {
+	const imageUrl = document.getElementById('urlInput').value;
+
+	if (imageUrl) {
+		const img = document.createElement('img');
+		img.src = imageUrl;
+		img.alt = 'Image from URL';
+		img.style.width = '100%';
+		img.style.height = 'auto';
+		document.body.appendChild(img);
+		document.getElementById('urlInput').style.display = 'none';
+		document.getElementById('displayButton').style.display = 'none';
+	} else {
+			document.body.textContent = "Please provide a valid image URL.";
+	}
+}
+</script>
+
+</body>
+</html>
