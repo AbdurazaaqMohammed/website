@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tap Counter</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #counter {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="counter">0</div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let counter = 0;
+            const counterDisplay = document.getElementById('counter');
+
+            document.addEventListener('click', () => { counterDisplay.textContent = counter++; });
+        });
+    </script>
+</body>
+</html>
