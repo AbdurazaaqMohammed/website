@@ -138,7 +138,7 @@
 
 	async function decompile() {
 				document.getElementById('log').innerHTML += "Decompiling..<br>";
-		await cheerpjRunJar("/app/xml2axml-2.0.1.jar", ['d'], ["/str/fileName.xml"], ["/files/test.xml"]);
+		await cheerpjRunJar("/website/app/xml2axml-2.0.1.jar", ['d'], ["/str/fileName.xml"], ["/files/test.xml"]);
 		const blob = await cjFileBlob("/files/test.xml");
 		const text = await blob.text();
 		document.getElementById("myInput").value = text;
@@ -148,7 +148,7 @@
 	async function recompile() {
 				document.getElementById('log').innerHTML += "Compiling..<br>";
 		cheerpOSAddStringFile("/str/fileName.xml", document.getElementById("myInput").value.trim());
-		await cheerpjRunJar("/app/xml2axml-2.0.1.jar", ['e'], ["/str/fileName.xml"], ["/files/test.xml"]);
+		await cheerpjRunJar("/website/app/xml2axml-2.0.1.jar", ['e'], ["/str/fileName.xml"], ["/files/test.xml"]);
 		const blob = await cjFileBlob("/files/test.xml");
 		const dl = document.getElementById("downloadLink");
 		dl.href = window.URL.createObjectURL(blob);
