@@ -22,7 +22,7 @@
 				const urls = imageUrls.split(',');
 				urls.forEach(url => {
 					const img = document.createElement('img');
-					img.src = url.trim();
+					img.src = url.replaceAll("preview.redd", "i.redd").trim();
 					img.alt = 'Image from URL';
 					document.body.appendChild(img);
 				});
